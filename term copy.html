@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="path/to/jquery-ui.css" /> -->
+    <!-- <link rel="stylesheet" href="path/to/altfont.css" /> -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- <link rel="stylesheet" href="path/to/punk.css" /> -->
+    <!-- <link rel="stylesheet" href="path/to/def.css" /> -->
+    <title>Web Terminal</title>
+    <style>
+      /* Add any additional styles here */
+    </style>
+  </head>
+
+  <body cz-shortcut-listen="true">
+    <div class="profile MYHIDE" id="profile">
+      <div class="mini_header">
+        <i class="mi mi-ChromeClose" id="close_about" onclick="ABOUT_GO()"></i>
+        <i class="fa-sharp fa-solid fa-heart fa-beat" id="about_heart"></i>
+        <div class="mini_header_filter"></div>
+
+        <div class="mini_header_toolbar"></div>
+        <div class="mini_abs"><div class="mini_pic"></div></div>
+      </div>
+
+      <div class="name_cred"><k>Made with ♥ by</k> Forbannet</div>
+      <div class="name_cred_mini"></div>
+
+      <div class="disclaimer">
+        This is a <rr>personal</rr> project for learning purposes only, <rr>not</rr> made to fullfil the
+        <span id="below"><ss>“intricate and complex needs of the enterprise“.</ss></span>
+      </div>
+      <div class="disclaimer_2" onclick="window.open('https://spdx.org/licenses/GLWTPL.html', '_blank');">
+        This code snippet is licensed under the <rr>GLWTPL</rr> public license
+      </div>
+
+      <div class="disclaimer_jp">複雑で入念な企業のニーズ - を満たすために作られたものではありません。アナーキー。</div>
+
+      <div class="anime_gif"></div>
+      <div class="prof_stickers"></div>
+      <div class="prof_qrcode"></div>
+
+      <div class="side_prof_right">
+        <div style="height: 12px"></div>
+        <div class="side_i_holder">
+          <i class="fa-sharp fa-solid fa-house" onclick="window.open('https://kernelriot.com', '_blank')"></i>
+        </div>
+
+        <div class="side_i_holder">
+          <i class="fa-brands fa-twitter" onclick="window.open('https://twitter.com/soloween_', '_blank')"></i>
+        </div>
+
+        <div class="side_i_holder">
+          <i class="fa-brands fa-github-alt" onclick="window.open('https://github.com/layer07', '_blank')"></i>
+        </div>
+
+        <div class="side_i_holder">
+          <i class="fa-brands fa-discord" onclick="window.open('https://discord.com/users/295735535304179712', '_blank')"></i>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let commandHistory = [];
+      let historyIndex = -1;
+      let bash_string = "root@empasquer~#";
+      let bias = 8;
+      let balance = 0;
+    </script>
+
+    <style>
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #3b3b3b;
+        border-radius: 0px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ff0066;
+        border-radius: 0px;
+      }
+    </style>
+
+    <div class="Term_Parent_Window ui-draggable ui-draggable-handle" id="Term_Parent_Window">
+      <div class="fire_png"></div>
+      <div class="Term_Header" id="Term_Header">
+        <div class="left-content">
+          <i class="mi mi-List" id="Drop_Spawn"></i>
+          <div class="dropdown_parent" id="dropdown_parent">
+            <div class="drop_item_parent" onclick="clear_console()">
+              <div class="drop_1"><i class="fa-light fa-trash"></i></div>
+              <div class="drop_2"><a>Clear Console</a></div>
+              <div class="drop_3"></div>
+            </div>
+
+            <div class="drop_item_parent" onclick="clear_cmd_history()">
+              <div class="drop_1"><i class="fa-light fa-trash-clock"></i></div>
+              <div class="drop_2"><a>Clear History</a></div>
+              <div class="drop_3"></div>
+            </div>
+
+            <div class="drop_item_parent" onclick="font_tog()" id="font_tog_main">
+              <div class="drop_1"><i class="fa-light fa-text"></i></div>
+              <div class="drop_2"><a>Blocky Font</a></div>
+              <div class="drop_3"><i class="mi mi-Accept" id="alt_font_tick"></i></div>
+            </div>
+
+            <div class="drop_item_parent" onclick="punk_tog()">
+              <div class="drop_1"><i class="fa-light fa-narwhal"></i></div>
+              <div class="drop_2"><a>Punk Theme</a></div>
+              <div class="drop_3"><i class="mi mi-Accept" id="alt_theme_tick" style="opacity: 1"></i></div>
+            </div>
+
+            <div class="drop_item_parent" onclick="HELP_PRINT()">
+              <div class="drop_1"><i class="fa-light fa-question"></i></div>
+              <div class="drop_2"><a>Help</a></div>
+              <div class="drop_3"></div>
+            </div>
+
+            <div class="drop_item_parent" onclick="ABOUT_GO()">
+              <div class="drop_1"><i class="mi mi-ContactInfo"></i></div>
+              <div class="drop_2"><a>About</a></div>
+              <div class="drop_3"></div>
+            </div>
+
+            <div class="drop_item_parent lastdrop">
+              <div class="drop_1"><i class="fa-light fa-xmark-large"></i></div>
+              <div class="drop_2"><a>Close</a></div>
+              <div class="drop_3"></div>
+            </div>
+          </div>
+        </div>
+        <div class="Term_Header_Text rainbow_text_animated"><a>root @ empasquer</a></div>
+
+        <div class="TermButtons">
+          <i class="mi mi-ChromeMinimize TermBut" id="MinButton"></i>
+          <i class="mi mi-ChromeMaximize TermBut" id="MaxButton"></i>
+          <i class="mi mi-ChromeClose TermBut LH RedHV"></i>
+        </div>
+      </div>
+      <div class="TermBody" id="MainTerm">
+        <div class="term_parent_line">
+          <span class="term_bash">root@empasquer~# </span>
+          <tc>Hello, this is <rs>Em</rs>!</tc>
+        </div>
+        <div class="term_parent_line">
+          <span class="term_bash">root@empasquer~# </span>
+          <tc>Yeah, I am <r>actually</r> a working terminal! Can you believe it?</tc>
+        </div>
+
+        <section id="beg"></section>
+        <section id="beg"></section>
+      </div>
+
+      <script src="deps.js"></script>
+      <script src="script.js"></script>
+      <script src="bashparse.js"></script>
+      <script src="term.js"></script>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </body>
+</html>
